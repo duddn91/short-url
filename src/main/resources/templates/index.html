@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>URL 단축 서비스</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h2 class="text-center">URL 단축 서비스</h2>
+
+    <form action="#" th:action="@{/shorten}" method="post" class="mt-4">
+        <div class="mb-3">
+            <label for="originalUrl" class="form-label">단축할 URL 입력:</label>
+            <input type="text" id="originalUrl" name="originalUrl" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-primary">단축하기</button>
+    </form>
+
+    <div class="mt-4">
+        <h4>단축된 URL 목록:</h4>
+        <ul>
+            <li th:each="url : ${shortenedUrls}">
+                원본: <span th:text="${url.originalUrl}"></span> →
+                <a th:href="@{/{shortId}(shortId=${url.shortId})}" th:text="${url.shortId}" target="_blank"></a>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>
